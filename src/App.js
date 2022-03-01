@@ -1,15 +1,14 @@
 import logo from './logo.svg';
 import './App.css';
 import {useEffect, useState} from "react";
-
 function App() {
     const WEATHER_API = "https://weatherdbi.herokuapp.com/data/weather/";
-
     const [count, setCount] = useState(0);
     const [drawing, setDrawing] = useState("");
     const [title, setTitle] = useState("");
     const [icon, setIcon] = useState("");
     const [cityName, setCityName] = useState("barcelona");
+    const [cityFiveDays, setCityFiveDays] = useState("");
 
     function updateDrawing() {
         if (count === 0) {
@@ -25,6 +24,9 @@ function App() {
         setTitle(`Buenos días, hoy tenemos ${temperature} grados en ${cityName}`)
         setIcon(iconURL)
     }
+
+
+
 
     useEffect( () => {
         fetch(WEATHER_API + cityName) // saco el JSON de datos
@@ -47,9 +49,6 @@ function App() {
 
     const [weather, setWeather] = useState([]);
 
-
-
-
     useEffect( () => console.log(
         "Hola, llevamos "+ count),
         [count]);
@@ -67,6 +66,7 @@ function App() {
             <input type={"text"} onChange={(e) => setCityName(e.target.value) } />
             <p> {`La cuenta es ${count}`}</p>
             <p> { drawing } </p>
+            <p>{cityFiveDays}</p>
             <button onClick={increaseCounter}>Incrementar</button>
         </div>
     );
