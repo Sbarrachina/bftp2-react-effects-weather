@@ -1,7 +1,7 @@
-import logo from './logo.svg';
 import './App.css';
 import {useEffect, useState} from "react";
 import miClave from './.env';
+
 function App() {
     const WEATHER_API = "https://weatherdbi.herokuapp.com/data/weather/";
     const WEATHER_API5Dias = { url:"https://community-open-weather-map.p.rapidapi.com/forecast?q=barcelona%2Ces",
@@ -35,9 +35,6 @@ function App() {
         setIcon(iconURL)
     }
 
-
-
-
     useEffect( () => {
         fetch(WEATHER_API + cityName) // saco el JSON de datos
             .then(r => r.json()) //
@@ -46,20 +43,9 @@ function App() {
 
     useEffect( () => {
         fetch( WEATHER_API5Dias)
-
             .then(r => r.json())
-            .then(setCityFiveDays(r)  )
 
     },[]);
-
-
-
-
-
-
-
-
-
 
     useEffect( () => console.log(
         "Hola, llevamos "+ count),
