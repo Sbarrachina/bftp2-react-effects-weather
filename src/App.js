@@ -32,6 +32,24 @@ function App() {
             .then( updateWeatherData )
     }, [cityName]);
 
+    useEffect(()=> {
+        fetch("https://community-open-weather-map.p.rapidapi.com/forecast?q=barcelona%2Ces", {
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": "community-open-weather-map.p.rapidapi.com",
+                "x-rapidapi-key": "c7a7120e8bmsh2528663f9e31783p14d3c6jsncb74e94eac25"
+            }
+        })  .then(response => response.json())
+            .then(response => {
+            console.log(response);
+        })
+    }, []);
+
+    const [weather, setWeather] = useState([]);
+
+
+
+
     useEffect( () => console.log(
         "Hola, llevamos "+ count),
         [count]);
