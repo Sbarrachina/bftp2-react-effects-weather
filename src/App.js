@@ -1,10 +1,8 @@
 import './App.css';
 import {useEffect, useState} from "react";
-<<<<<<< HEAD
 import miClave from './.env';
 
-=======
->>>>>>> dcc4cccbfc8f763dd4237cfebe6baa78937ec3b9
+
 function App() {
     const WEATHER_API = "https://weatherdbi.herokuapp.com/data/weather/";
     const [count, setCount] = useState(0);
@@ -44,13 +42,13 @@ function App() {
             .then( updateWeatherData )
     }, [cityName]);
 
-<<<<<<< HEAD
+
     useEffect( () => {
         fetch( WEATHER_API5Dias)
             .then(r => r.json())
 
     },[]);
-=======
+
     const [weather, setWeather] = useState([{temp: ''}]);
 
     useEffect(()=> {
@@ -67,7 +65,6 @@ function App() {
         })
     }, []);
 
->>>>>>> dcc4cccbfc8f763dd4237cfebe6baa78937ec3b9
 
     useEffect( () => console.log(
         "Hola, llevamos "+ count),
