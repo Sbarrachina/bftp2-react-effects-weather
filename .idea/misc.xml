@@ -3,7 +3,10 @@
   <component name="ProjectRootManager">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
+<<<<<<< HEAD
   <component name="ProjectType">
     <option name="id" value="jpab" />
   </component>
+=======
+>>>>>>> 92f82332aab3a49959edb421f0b0dc63f9b4af35
 </project>
