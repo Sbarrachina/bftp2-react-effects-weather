@@ -6,6 +6,8 @@ function App() {
     const [count, setCount] = useState(0);
     const [drawing, setDrawing] = useState("");
     const [title, setTitle] = useState("");
+    const [title2, setTitle2] = useState("");
+    const [titleTomorrow, setTitleTomorrow] = useState("");
     const [icon, setIcon] = useState("");
     const [cityName, setCityName] = useState("barcelona");
     const [cityFiveDays, setCityFiveDays] = useState("");
@@ -24,6 +26,13 @@ function App() {
         setTitle(`Buenos días, hoy tenemos ${temperature} grados en ${cityName}`)
         setIcon(iconURL)
     }
+    function updateWeatherData5Days( data ) {
+        const temperatureInKelvin = data.list[0].main.temp
+        const temperatureInCelsiusTomorrow = (data.list[3].main.temp - 273).toFixed(0)
+        const tempInCelsius = (temperatureInKelvin - 273).toFixed(0);
+        setTitle2(`Buenos días, hoy tenemos ${tempInCelsius} ℃ grados en Barcelona 😁`)
+        setTitleTomorrow(`Buenos días, mañana hará ${temperatureInCelsiusTomorrow} ℃ grados en Barcelona 🥶`)
+    }
 
 
 
@@ -34,6 +43,8 @@ function App() {
             .then( updateWeatherData )
     }, [cityName]);
 
+    const [weather, setWeather] = useState([{temp: ''}]);
+
     useEffect(()=> {
         fetch("https://community-open-weather-map.p.rapidapi.com/forecast?q=barcelona%2Ces", {
             "method": "GET",
@@ -42,12 +53,12 @@ function App() {
                 "x-rapidapi-key": "c7a7120e8bmsh2528663f9e31783p14d3c6jsncb74e94eac25"
             }
         })  .then(response => response.json())
+            .then( updateWeatherData5Days )
             .then(response => {
             console.log(response);
         })
     }, []);
 
-    const [weather, setWeather] = useState([]);
 
     useEffect( () => console.log(
         "Hola, llevamos "+ count),
@@ -56,17 +67,21 @@ function App() {
     useEffect(updateDrawing, [count]);
 
     function increaseCounter() {
-        setCount(count + 1);
+        if (count < 5) {
+            setCount(count + 1);
+        }
+        else setCount(0)
     }
 
     return (
         <div className="App">
-            <h2>{ title }</h2>
+            <h1>{ title }</h1>
+            <h2>{ title2 }</h2>
+            <h3>{ titleTomorrow }</h3>
             <img src={icon} alt="weather icon"/>
             <input type={"text"} onChange={(e) => setCityName(e.target.value) } />
             <p> {`La cuenta es ${count}`}</p>
             <p> { drawing } </p>
-            <p>{cityFiveDays}</p>
             <button onClick={increaseCounter}>Incrementar</button>
         </div>
     );
